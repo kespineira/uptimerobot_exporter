@@ -1,0 +1,32 @@
+name: Lint
+
+on:
+  push:
+    paths:
+        - "go.sum"
+        - "go.mod"
+        - "**/*.go"
+        - ".github/workflows/lint.yaml"
+        - ".golangci.yaml"
+  pull_request:
+
+jobs:
+  lint:
+    name: Lint Check
+    permissions:
+      contents: read
+      pull-requests: read
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: ${{ github.workspace }}/go.mod
+
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@v6
+        with:
+          version: v1.58
