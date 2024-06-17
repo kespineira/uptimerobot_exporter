@@ -28,5 +28,5 @@ go.work.sum
 bin
 build
 dist
-uptimerobot_exporter
+/uptimerobot_exporter
 .DS_Store
