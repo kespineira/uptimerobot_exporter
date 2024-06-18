@@ -39,7 +39,7 @@ dockers:
       - "ghcr.io/kespineira/uptimerobot_exporter:{{.Version}}-amd64"
     dockerfile: Dockerfile
     build_flag_templates:
-      - "-pull"
+      - "--pull"
       - "--platform=linux/amd64"
   - goos: linux
     goarch: arm64
@@ -48,7 +48,7 @@ dockers:
       - "ghcr.io/kespineira/uptimerobot_exporter:{{.Version}}-arm64"
     dockerfile: Dockerfile
     build_flag_templates:
-      - "-pull"
+      - "--pull"
       - "--platform=linux/arm64"
 docker_manifests:
   - name_template: "docker.io/kespineira/uptimerobot_exporter:{{.Version}}"
