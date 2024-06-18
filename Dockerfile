@@ -1,43 +1,9 @@
-# syntax=docker/dockerfile:1
+FROM alpine AS builder
+RUN apk add --no-cache ca-certificates
 
-ARG GO_VERSION=1.22.4
-FROM --platform=$BUILDPLATFORM golang:${GO_VERSION} AS build
-WORKDIR /src
-
-RUN --mount=type=cache,target=/go/pkg/mod/ \
-    --mount=type=bind,source=go.sum,target=go.sum \
-    --mount=type=bind,source=go.mod,target=go.mod \
-    go mod download -x
-
-ARG TARGETARCH
-
-RUN --mount=type=cache,target=/go/pkg/mod/ \
-    --mount=type=bind,target=. \
-    CGO_ENABLED=0 GOARCH=$TARGETARCH go build -o /bin/uptimerobot_exporter ./cmd/uptimerobot_exporter
-
-
-FROM alpine:latest AS final
-
-RUN --mount=type=cache,target=/var/cache/apk \
-    apk --update add \
-        ca-certificates \
-        tzdata \
-        && \
-        update-ca-certificates
-
-ARG UID=10001
-RUN adduser \
-    --disabled-password \
-    --gecos "" \
-    --home "/nonexistent" \
-    --shell "/sbin/nologin" \
-    --no-create-home \
-    --uid "${UID}" \
-    appuser
-USER appuser
-
-COPY --from=build /bin/uptimerobot_exporter /bin/
-
+FROM scratch AS final
+USER 65535:65535
+COPY  --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
+COPY ./uptimerobot_exporter /
 EXPOSE 8080
-
-ENTRYPOINT [ "/bin/uptimerobot_exporter" ]
+ENTRYPOINT ["/uptimerobot_exporter"]
