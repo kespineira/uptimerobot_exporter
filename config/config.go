@@ -17,6 +17,6 @@ func LoadConfig() {
 	}
 	Port = os.Getenv("PORT")
 	if Port == "" {
-		Port = "8080"
+		Port = "9429"
 	}
 }

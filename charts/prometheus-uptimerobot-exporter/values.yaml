@@ -1,0 +1,110 @@
+# Default values for prometheus-uptimerobot-exporter.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicas: 1
+
+image:
+  repository: kespineira/uptimerobot_exporter
+  pullPolicy: IfNotPresent
+  tag: ""
+
+env: {}
+
+uptimerobot:
+  apiKey: "XXXXXXXX"
+
+# Name of an externally managed secret (in the same namespace) containing the connection uri as key `uptimerobot-api-key`.
+# If this is provided, the value uptimerobot.apiKey is ignored.
+existingSecret:
+  name: ""
+  key: "uptimerobot-api-key"
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Automatically mount a ServiceAccount's API credentials?
+  automount: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+#  prometheus.io/scrape: "true"
+#  prometheus.io/port: "8080"
+#  prometheus.io/path: /metrics
+
+podLabels: {}
+
+priorityClassName: ""
+
+securityContext:
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop: ["all"]
+  readOnlyRootFilesystem: true
+  runAsGroup: 10000
+  runAsNonRoot: true
+  runAsUser: 10000
+
+service:
+  type: ClusterIP
+  port: 9429
+  portName: metrics
+  labels: {}
+  annotations: {}
+
+resources: {}
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+livenessProbe:
+  httpGet:
+    path: /
+    port: metrics
+  initialDelaySeconds: 10
+readinessProbe:
+  httpGet:
+    path: /
+    port: metrics
+  initialDelaySeconds: 10
+
+# Additional volumes on the output Deployment definition.
+volumes: []
+# - name: foo
+#   secret:
+#     secretName: mysecret
+#     optional: false
+
+# Additional volumeMounts on the output Deployment definition.
+volumeMounts: []
+# - name: foo
+#   mountPath: "/etc/foo"
+#   readOnly: true
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+serviceMonitor:
+  enabled: false
+  interval: 30s
+  scrapeTimeout: 10s
+  namespaces:
+  additionalLabels: {}
+  targetLabels: []
+  metricRelabelings: []
+  scheme: ""
+  tlsConfig: {}
