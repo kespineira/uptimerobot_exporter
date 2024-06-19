@@ -1,0 +1,24 @@
+apiVersion: v1
+entries:
+  prometheus-uptimerobot-exporter:
+  - apiVersion: v2
+    appVersion: v1.0.0
+    created: "2024-06-19T16:12:10.799558143Z"
+    description: A Prometheus exporter for UptimeRobot
+    digest: 61a88a8aa6950b4de47e4f6a49e4e134817409b0807bb7f199a87a6044fb28ce
+    keywords:
+    - prometheus
+    - exporter
+    - metrics
+    - uptimerobot
+    maintainers:
+    - email: kevin.espineira@gmail.com
+      name: kespineira
+    name: prometheus-uptimerobot-exporter
+    sources:
+    - https://github.com/kespineira/uptimerobot_exporter
+    type: application
+    urls:
+    - https://github.com/kespineira/uptimerobot_exporter/releases/download/prometheus-uptimerobot-exporter-1.0.0/prometheus-uptimerobot-exporter-1.0.0.tgz
+    version: 1.0.0
+generated: "2024-06-19T16:12:10.79956734Z"
