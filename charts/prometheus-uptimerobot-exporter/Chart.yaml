@@ -1,0 +1,16 @@
+apiVersion: v2
+name: prometheus-uptimerobot-exporter
+description: A Prometheus exporter for UptimeRobot
+version: 1.0.0
+appVersion: "v1.0.0"
+type: application
+keywords:
+  - prometheus
+  - exporter
+  - metrics
+  - uptimerobot
+maintainers:
+  - name: kespineira
+    email: kevin.espineira@gmail.com
+sources:
+  - https://github.com/kespineira/uptimerobot_exporter
