@@ -12,7 +12,7 @@ Please refer to Helm's [documentation](https://helm.sh/docs/) to get started.
 Once Helm is set up properly, add the repository as follows:
 
 ```console
-helm repo add uptimerobot-exporter https://kespineira.github.io/uptimerobot-exporter
+helm repo add uptimerobot-exporter https://kespineira.github.io/uptimerobot_exporter
 ```
 
 You can then run `helm search repo uptimerobot-exporter` to see the charts.
