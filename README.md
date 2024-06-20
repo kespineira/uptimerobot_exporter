@@ -12,7 +12,7 @@ The UptimeRobot Exporter is a Prometheus exporter for the UptimeRobot API. It al
 To get started with the UptimeRobot Exporter quickly, you can use the provided Docker container. Run the following command to start the exporter:
 
 ```sh
-docker run -d -p 8080:8080 -e UPTIMEROBOT_API_KEY=your_api_key_here kespineira/uptimerobot_exporter
+docker run -d -p 9429:9429 -e UPTIMEROBOT_API_KEY=your_api_key_here kespineira/uptimerobot_exporter
 ```
 
 Replace `your_api_key_here` with your actual UptimeRobot API key.

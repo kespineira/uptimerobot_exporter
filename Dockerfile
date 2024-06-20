@@ -5,5 +5,5 @@ FROM scratch AS final
 USER 65535:65535
 COPY  --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 COPY ./uptimerobot_exporter /
-EXPOSE 8080
+EXPOSE 9429
 ENTRYPOINT ["/uptimerobot_exporter"]
