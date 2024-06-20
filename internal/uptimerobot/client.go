@@ -21,7 +21,7 @@ func NewClient() *Client {
 
 func (c *Client) GetMonitors() ([]Monitor, error) {
 	url := "https://api.uptimerobot.com/v2/getMonitors"
-	data := []byte(`{"api_key":"` + c.apiKey + `", "format":"json", "response_times":"1", "response_times_average":"30"}`)
+	data := []byte(`{"api_key":"` + c.apiKey + `", "format":"json", "response_times":"1", "response_times_limit":"1"}`)
 
 	req, err := http.NewRequest("POST", url, bytes.NewBuffer(data))
 	if err != nil {

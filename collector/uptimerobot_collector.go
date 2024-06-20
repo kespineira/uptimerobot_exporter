@@ -58,11 +58,10 @@ func (c *UptimeRobotCollector) Collect(ch chan<- prometheus.Metric) {
 	}
 
 	for _, monitor := range monitors {
-		avgResponseTime, _ := strconv.ParseFloat(monitor.AvgResponseTime, 64)
 		ch <- prometheus.MustNewConstMetric(
 			c.responseTime,
 			prometheus.GaugeValue,
-			avgResponseTime,
+			float64(monitor.ResponseTimes[0].Value),
 			monitor.FriendlyName,
 			strconv.Itoa(monitor.Type),
 			monitor.URL,
